@@ -1,0 +1,260 @@
+/* Start global rules */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-color: #267370;
+    --main-color-alt: #31938f;
+    --main-hover : #2e8871a8;
+    --red-color : #c15119;
+    --main-transition: 0.3s;
+    --main-padding-top: 80px;
+    --main-padding-bottom: 80px;
+    --section-background: #ececec;
+    --main-font: "Cairo" , sans-serif
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: "Cairo" , sans-serif;
+}
+
+@font-face {
+    font-family: 'Cairo',sans-serif;
+    src: url(/Fonts/Cairo-Light.ttf);
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: 'Cairo', sans-serif;
+    src: url(../Fonts/Cairo-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Cairo', sans-serif;
+    src: url(../Fonts/Cairo-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Cairo', sans-serif;
+    src: url(../Fonts/Cairo-ExtraBold.ttf);
+    font-weight: 800;
+}
+
+body {
+    font-family: 'Cairo' , sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+/* My Container */
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+
+/* End global rules */
+/* Start BackGround */
+.no-overflow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+.no-overflow .pointed-groub{
+    position: fixed;
+    opacity: 0.08;
+    transform: scale(1.1);
+    max-height: 100vb;
+    overflow: hidden;
+    animation: backGroundMove 8s linear 0s infinite alternate ;
+}
+
+header.main-header{
+    height: 150px;
+    max-height: 200px;
+    background-color: rgba(255, 255, 255, 0.549);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+header.main-header::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to left , transparent 10%, var(--main-color), transparent 90%);
+    bottom: 0;
+    z-index: 3;
+}
+    
+header.main-header img{
+    width: 75px;
+}
+    
+header.main-header #user-welcome{
+    font-size: 18px;
+    font-weight: bold;
+    color:var(--main-color);
+}
+    
+
+@keyframes backGroundMove {
+    from{
+        left: -8%;
+    }
+    to{
+        left: 1%;
+    }
+}
+@media (max-width: 768px) {
+    .no-overflow .pointed-groub{
+        animation-duration: 3s;
+    }    
+}
+/* End BackGround */
+
+@keyframes FadgeOut {
+    0%{
+        visibility: visible;
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+}
+
+
+@keyframes Fadgein {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes Fadgeinhalf {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 0.5;
+    }
+}
+
+
+@keyframes WrongUser {
+    0%{
+        opacity: 0;
+        top: 0%;
+    }
+    5%{
+        opacity: 1;
+        top: 5%;
+    }
+    95%{
+        opacity: 1;
+        top: 5%;
+    }
+    100%{
+        opacity: 0;
+        top: 0%;
+    }
+}
+
+.pop-holder{
+    position: fixed;
+    width: fit-content;
+    height: fit-content;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 20px;
+    background-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    animation: WrongUser 5s linear 0s forwards;
+    z-index: 100;
+
+}
+.pop-holder i{
+    margin-left: 5px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}

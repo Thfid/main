@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" title="خيركم من تعلم القرآن وعلمه"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="CSS/all.min.css">
+         <!-- GoogleFonts -->
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">    
+    <!-- Main Css Style Sheet -->
+    <link rel="stylesheet" href="CSS/Main.css">
+    <!-- Components Css Style Sheet -->
+    <link rel="stylesheet" href="CSS/Components.css">
+    <!-- Icon -->
+    <link rel="icon" href="IMG/SilverLogo.svg">
+    <title>حلقة إبن مسعود</title>
+    
+</head>
+<body>
+    <!-- Start BackGround -->
+    <div class="no-overflow">
+        <div class="pointed-groub">
+            <img src="IMG/Pointed.png">
+        </div>
+    </div>
+    <!-- End BackGround -->
+    <!-- Start Content -->
+    <div class="content" id="content">
+        <div class="container">
+            <div class="logo">
+                <img src="IMG/Logo.svg" alt="">
+               </div> 
+               <div class="nav">
+                <ul>
+                    <li><button id="parents"><a href="">ولي أمر</a></button></li>
+                    <li><button id="studints"><a href="">طـالـب</a></button></li>
+                   
+                </ul>
+               </div>
+        </div>
+    </div>
+    <!-- End Content -->
+    <!-- Start Studint Pop up -->
+        <div class="studint-pop pop" id="studintPop">
+            <div class="container">
+                <h2 class="studinth2">دخول الطلاب</h2>
+                <form class="id-number">
+                    <label class="pop-label" for="studintId"> :  اسم المستخدم</label>
+                    <div class="pop-input-holder">
+                    <input class="pop-input" type="number" id="studintId" placeholder="أدخل آخر 6 ارقام من رقم الهوية" maxlength="6">
+                    </div>
+                    <div class="btn-holder">
+                        <button class="pop-btn back" id="studintPopBack">عودة</button>    
+                        <input class="pop-btn submit" type="submit" id="studintSub" value="دخول">
+                    </div>
+                </form>
+            </div>
+        </div>
+    <!-- End Studint Pop up -->
+    <!-- Start Parent Pop up -->
+        <div class="parent-pop pop" id="parentPop">
+            <div class="container">
+                <h2 class="parenth2">دخول أولياء الأمور</h2>
+                <form class="id-number">
+                    <label class="pop-label" for="parentId"> :  اسم المستخدم</label>
+                    <div class="pop-input-holder">
+                    <input class="pop-input" type="number" id="parentId" placeholder="أدخل آخر 6 ارقام من رقم الهوية" maxlength="6">
+                    </div>
+                    <div class="btn-holder">
+                        <button class="pop-btn back" id="parentPopBack">عودة</button>    
+                        <input class="pop-btn submit" type="submit" id="parentSub" value="دخول">
+                    </div>
+                </form>
+            </div>
+        </div>
+    <!-- End Parent Pop up -->
+    <!-- Start of UnVisibile Element -->
+    <a class="Undisplay" href="./parent-main.html" id="parentLink"></a>
+    <a class="Undisplay" href="./studint-main.html" id="studientLink"></a>
+    <div class="wrong-user"> <i class="fa-regular fa-circle-xmark"></i><p>اسم المستخدم خاطئ</p></div>
+    <!-- End Of HTML Code -->
+
+    <!-- Start JS Code -->
+    <script type="module" src="JS/Main.js"></script>
+    <script type="module" src="JS/Eshada.js"></script>
+</body>
+</html>

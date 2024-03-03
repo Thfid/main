@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" title="خيركم من تعلم القرآن وعلمه"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="CSS/all.min.css">
+    <!-- Main Css Style Sheet -->
+    <link rel="stylesheet" href="CSS/Parent.css">
+     <!-- Components Css Style Sheet -->
+     <link rel="stylesheet" href="CSS/Components.css">
+     <!-- GoogleFonts -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
+     <!-- Icon -->
+    <link rel="icon" href="IMG/SilverLogo.svg">
+    <title>تحفيظ ابن مسعود</title>
+    
+</head>
+<body>
+    <!-- Start BackGround -->
+    <div class="no-overflow">
+        <div class="pointed-groub">
+            <img src="IMG/Pointed.png">
+        </div>
+    </div>
+    <!-- End BackGround -->
+    
+    <!-- Start Header -->
+    <header class="main-header">
+        <img src="IMG/Logo.svg" alt="">
+        <div id="user-welcome">مرحبا</div>
+    </header>
+    <!-- End Header -->
+    <div class="content">
+        <div class="container">
+            <div class="studint-taple">
+                <div class="next-previous">
+                    <div class="container">
+                        <span id="goback">                   
+                            <i class="fa-solid fa-reply-all fa-flip-horizontal"></i>
+                        </span>
+                        <div class="previous npcn" id="previous-data"><i class="fa-solid fa-angles-right"></i></div>
+                        <h1 id="TitleOfTable">الأسبوع الأول من شهر شعبان</h1>
+                        <div class="next npcn" id="next-data"><i class="fa-solid fa-angles-right fa-flip-horizontal "></i></div>    
+                    </div>
+                </div>
+                <div class="container">
+                    <table>
+                        <thead>
+                                <tr>
+                                    <th  class="number col-sticky">العدد</td>
+                                    <th  class="name col-sticky">اسم الطالب</td>
+                                    <td class="day-1">
+                                        <div class="holder">
+                                            <span class="day">الأحد</span>
+                                            <span class="date"></span>
+                                        </div>
+                                    </td>
+                                    <td class="day-2">
+                                        <div class="holder">
+                                            <span class="day">الإثنين</span>
+                                            <span class="date"></span>
+                                        </div>
+                                    </td>
+                                    <td class="day-3">
+                                        <div class="holder">
+                                            <span class="day">الثلاثاء</span>
+                                            <span class="date"></span>
+                                        </div>
+                                    </td>
+                                    <td class="day-4">
+                                        <div class="holder">
+                                            <span class="day">الأربعاء</span>
+                                            <span class="date"></span>
+                                        </div>
+                                    </td>
+                                    <td class="day-5">
+                                        <div class="holder">
+                                            <span class="day">الخميس</span>
+                                            <span class="date"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>     
+        </div>
+    </div>
+
+
+    <!-- End Html Code's -->
+    <script type="module" src="JS/Parent/MainParent.js"></script>
+    <script type="module" src="JS/Hijri.js"></script>
+    <script type="module" src="JS/Eshada.js"></script>
+</body>
+</html>

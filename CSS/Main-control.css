@@ -1,0 +1,417 @@
+/* Start Header */
+header.main-header-pnc{
+    min-height: 520px;
+    max-height: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+header.main-header-pnc::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to left , transparent 10%, var(--main-color), transparent 90%);
+    bottom: 0;
+    z-index: 3;
+}
+    
+header.main-header-pnc img{
+    width: 320px;
+}
+    
+header.main-header-pnc #user-welcome{
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color:var(--main-color);
+}
+
+/* Start Main content */
+.content{
+    margin-top: 40px;
+}
+.content .container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    direction: rtl;
+}
+.content .container .box{
+    position: relative;
+    height: 250px;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 5px var(--main-color) solid;
+    box-shadow: 0px 6px 11px 0px #777777a6;        
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    transition: var(--main-transition);
+    cursor: pointer;
+}
+.content .container .box:hover{
+    background-color: var(--main-color);
+    transform: translateY(-10px);
+}
+
+.content .container .box i{
+    color: var(--main-color);
+    font-size: 90px;
+    transition: var(--main-transition);
+}
+.content .container .box:hover i{
+    color: white;
+    font-size: 90px;
+}
+
+.content .container .box .label{
+    color: var(--main-color);
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    transition: var(--main-transition);
+}
+.content .container .box:hover .label{
+    color: white;
+    font-size: 35;
+}
+
+.content .container .box .out{
+    color: #c15119;
+}
+@media (max-width:600px) {
+    .content .container{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+        direction: rtl;
+    }
+    .content .container .box i{
+        color: var(--main-color);
+        font-size: 75px;
+        transition: var(--main-transition);
+    }
+    .content .container .box:hover i{
+        color: white;
+        font-size: 90px;
+    }
+    .content .container .box .label{
+        color: var(--main-color);
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        transition: var(--main-transition);
+    }    
+    .content .container .box .out{
+        color: #c15119;
+    }
+    
+}
+
+.box.out {
+    border-bottom: 5px var(--red-color) solid !important;
+}
+.box.out:hover{
+    background-color: var(--red-color) !important;
+}
+
+.overlay{
+    background-color: black;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: 5;
+    opacity: 0;
+    transition: 0.3s;
+}
+/* End Of main content */
+
+/* Start Add Window */
+.add-window{
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    width: 80%;
+    max-width: 1600px;
+    height:fit-content;
+    border-radius: 20px;
+    z-index: 5;
+    opacity: 0;
+}
+.add-window .win-label{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: var(--main-color);
+    font-weight: bold;
+    border-bottom: 4px var(--main-color) solid;
+}
+.add-window form{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    direction: rtl;
+    padding: 20px;
+}
+.add-window form .handel{
+    flex-basis: 45%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+.add-window form .handel.radio{
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+.add-window form .handel.radio input[type="radio"]{
+    appearance: none;
+    color: var(--main-color);
+    width: 40%;
+    height: 60px;
+    border: 3px var(--main-color) solid;
+    border-radius: 15px;
+    transition: var(--main-transition);
+    position: relative;
+    cursor: pointer;
+}
+.add-window form .handel.radio input[type="radio"]:hover,
+.add-window form .handel.radio input[type="radio"]:checked{
+background-color: var(--main-color)
+}
+.add-window form .handel.radio input[type="radio"]:hover::after{
+    color: white;
+}
+.add-window form .handel.radio input[type="radio"]#Essam::after{
+    content: "الأستاذ عصام";
+}
+.add-window form .handel.radio input[type="radio"]#Abdullah::after{
+    content: "الأستاذ عبد الله";
+}
+.add-window form .handel.radio input[type="radio"]::after{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translate(-50% , -50%);
+    font-size: 25px;
+    font-family: "Cairo" , sans-serif;
+    color: var(--main-color);
+    z-index: 7;    
+}
+.add-window form .handel.radio input[type="radio"]:checked::after{
+    color: white;
+}
+.add-window form .handel input[type="Text"]{
+    padding: 15px;
+    height: 60px;
+    border-radius: 15px;
+    border: 1px var(--main-color) solid;
+    font-size: 20px;
+    font-family: "Cairo" , sans-serif;
+}
+.add-window form .handel #current-teatcher{
+    padding-right: 15px;
+    height: 60px;
+    border-radius: 15px;
+    border: 1px var(--main-color) solid;
+    font-size: 25px;
+    font-family: "Cairo" , sans-serif;
+}
+.add-window form .handel #current-teatcher option{
+    width: 100%;
+}
+.add-window form .handel label{
+    color: var(--main-color);
+    font-size: 25px;
+    font-weight: 600;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.add-window form .handel.btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.add-window form .handel.btns input[type="submit"],
+.add-window form .handel.btns button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 15px;
+    width: 100%;
+    height: 60px;
+    margin: 10px 10px 0 10px;
+    font-size: 30px;
+    font-family: "Cairo" , sans-serif;
+    font-weight: bold;
+    transition: var(--main-transition);
+    cursor: pointer;
+}
+
+.add-window form .handel.btns input[type="submit"]{
+    color: var(--main-color);
+    border: 3px var(--main-color) solid;
+}
+.add-window form .handel.btns input[type="submit"]:hover{
+    color: white;
+    background-color: var(--main-color);
+}
+.add-window form .handel.btns  button{
+    color: var(--red-color);
+    border: 3px var(--red-color) solid;
+}
+.add-window form .handel.btns  button:hover{
+    color: white;
+    background-color: var(--red-color);
+}
+
+
+/* End Add Window */
+@media (max-width : 1520px) {
+    .add-window{
+        transform: translate(-50%, -25%);
+    }
+    .add-window form .handel.radio input[type="radio"]::after{
+        font-size: 16px;
+    }
+}
+@media (max-width : 760px) {
+.add-window{
+padding: 10px;
+}
+.add-window form{
+    flex-direction: column;
+}
+.add-window form .handel{
+padding: 10px;
+width: 100%;
+
+}
+.add-window form .handel label{
+font-size: 20px;
+}
+
+.add-window form .handel input[type="Text"]{
+
+padding: 10px;
+height: 50px;
+font-size: 20px;
+}
+
+.add-window form .handel.radio .checkdiv{
+font-size: 18px;
+}
+}
+
+.download-Window{
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 1000px;
+    height: fit-content;
+    padding: 50px;
+    border-radius: 15px;
+    opacity: 0;
+    z-index: 6;
+}
+.download-Window .data-holder{
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(250px , 1fr));
+    gap: 10px;
+    direction: rtl;
+}
+.download-Window .data-holder .down{
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-color);
+    border-bottom: 5px var(--main-color) solid;
+    box-shadow: 0px 4px 11px 0px #777777a6; 
+    transition: var(--main-transition);
+    cursor: pointer;
+}
+.download-Window .data-holder .down i{
+    font-size: 80px;
+}
+
+.download-Window .data-holder .down .label{
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.download-Window .data-holder .down:hover{
+    color: white;
+    background-color: var(--main-color);
+    transform: translateY(-10px);
+}
+
+.download-Window .close{
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    left: 10px;
+}
+
+.download-Window .close i{
+    color: var(--main-color);
+    font-size: 50px;
+    position: absolute;
+}
+@media (max-height : 800px) {
+    .download-Window{
+        max-height: 500px;
+    }
+}
+@media (max-width : 800px) {
+    .download-Window{
+        width: 90%;
+    }
+    .download-Window .data-holder{
+        display: grid;
+        grid-template-columns: repeat(auto-fill , minmax(150px , 1fr));
+        gap: 10px;
+        direction: rtl;
+        
+    }
+    .download-Window .data-holder .down{
+        height: 200px;
+    }
+    .download-Window .data-holder .down i{
+        font-size: 50px;
+    }
+    
+    .download-Window .data-holder .down .label{
+        margin-top: 10px;
+        font-size: 20px;
+    }
+}
+ @media (max-width : 500px) {
+        .download-Window{
+            width: 90%;
+            overflow: scroll;
+            z-index: 10;
+    
+        }
+}
