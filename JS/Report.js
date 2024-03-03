@@ -415,7 +415,7 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
                 if(rate >= 45) appre.innerHTML = "ممتاز"
                 else if(rate < 45 && rate >= 40) appre.innerHTML = "جيد جدًا"
                 else if(rate < 40 && rate >= 30) appre.innerHTML = "جيد"
-                else if(rate < 30 && rate > 20) appre.innerHTML = "مقبول"
+                else if(rate < 30 && rate >= 20) appre.innerHTML = "مقبول"
                 else if(rate < 20) appre.innerHTML = "ضعيف"
 
                  
