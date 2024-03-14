@@ -1,10 +1,7 @@
 import HijriJS from "./Hijri.js"
+import surah from "./surah.js"
 import * as components from "./Eshada.js"
-// 1 - There is two type of users .. Parent & Studints 
-//  For That i have to do two fetchs .. one for Parent
-//  And one for student's .
 
-// 2 - Make Student only see thers meets
 
 let users =[]
 let mosqueNumber = ""
@@ -36,6 +33,10 @@ downbutton.onclick = () => {
 };
 // End Up Down Buttons
 
+// Get Surah Array from other file
+let surahArray = []
+surah.forEach(e=>{surahArray.push(Object.keys(e).join(""))})
+surahArray.reverse()
 
 
 let selectedDay = HijriJS.today().toString().split("/")[0]
@@ -339,18 +340,33 @@ rej=>{return components.popup("info" , "لا يوجد بيانات للشهر ا
                 let behaviorCircle = document.querySelector(`.a${id} .behavior-body svg circle`)
                 
                 let commitment = document.querySelector(`.a${id} .commitment-body span`)
+                let commLiNe = 8;
                 let linesTotal = 0
                 let commitmentCircle = document.querySelector(`.a${id} .commitment-body svg circle`)
 
                 let memoDecisiveness = 0
                 let revDecisiveness = 0
-
-                res.map(day=>{
+                
+                let daylength = res.length
+                res.map((day , index , array)=>{
                     data = day[Object.keys(day)]
                     data.daily.map(daily=>{
+
                         if(Object.keys(daily).join("") == id){
                             daily = daily[Object.keys(daily)]
+                            // Get Lines Target
+                            if(index == Math.floor(daylength / 2)){
+                                if(daily.memoSurah == ""){
+                                    daylength + 1
+                                }else {
+                                   if(surahArray.indexOf(daily.memoSurah) > 55){
+                                    commLiNe = 8
+                                   } else{
+                                    commLiNe = 5
+                                   }
 
+                                }
+                            }
                             if(daily.AttendanceState == 0 || daily.AttendanceState == 2 || daily.AttendanceState == 3 || daily.AttendanceState == 4 || daily.AttendanceState == 5){
                                 countableDay += 1
                                 // Memoriztion Calc
@@ -460,7 +476,7 @@ rej=>{return components.popup("info" , "لا يوجد بيانات للشهر ا
                 }
                 
                 // commitment
-                let commitmentTarget = 7.2 * countableDay
+                let commitmentTarget = commLiNe * countableDay
                 let commitclac = 0
                 let defferent = commitmentTarget - linesTotal
                 if(defferent <=0){
@@ -512,7 +528,7 @@ rej=>{return components.popup("info" , "لا يوجد بيانات للشهر ا
                     totalCircle.style.stroke = "#c11d19";
                 }
                 let appre = document.querySelector(`.${e.classList[0]}  .appre`)
-                if(rate >= 45) appre.innerHTML = "ممتاز"
+                if(rate >= 45) appre.innerHTML = `<div>ممتاز</div><i class="fa-solid fa-crown"></i>`
                 else if(rate < 45 && rate >= 40) appre.innerHTML = "جيد جدًا"
                 else if(rate < 40 && rate >= 30) appre.innerHTML = "جيد"
                 else if(rate < 30 && rate >= 20) appre.innerHTML = "مقبول"

@@ -445,8 +445,14 @@ td.total-body circle{
     }
     .student-table .container table tbody tr  div.appre{
         margin-top: 4px;
-        /* font-family: 'Hesham' , serif; */
         font-size: 20px;
+    }
+    .student-table .container table tbody tr  div.appre i{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        color:  #ffd600;
     }
 
 /* Start Control */
