@@ -1,5 +1,7 @@
 import * as components from "./Eshada.js"
 
+// Clear Session Storage 
+sessionStorage.clear()
 // Start Showing Pop up
 let studint = document.getElementById("studints")
 let parent = document.getElementById("parents")

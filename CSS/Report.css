@@ -114,8 +114,8 @@
 .next-previous .npcn{
     color: var(--main-color);
     font-size: 40px;
-    margin-left: 20px;
-    margin-right: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-top: 5px;
     cursor: pointer;
     transition: var(--main-transition);
@@ -124,30 +124,6 @@
 .next-previous .npcn:hover{
     color: var(--main-hover);
     transform: scale(1.1);
-}
-@media (max-width : 600px) {
-    .next-previous .container{
-        flex-wrap: wrap;
-        height: 150px;
-    }
-    .next-previous .container h1{
-        order: 1;
-    }        
-    .next-previous .container .previous{
-        margin-top: -30px;
-        order: 2;
-    }        
-    .next-previous .container .next{
-        order: 3;
-        margin-top: -30px;
-    }        
-    #goback{
-        display: none;
-    }
-    .up-down-holder{
-        display: none;
-    }
-
 }
 
 /* Start student table */
@@ -158,6 +134,7 @@
 }
 .student-table .container{
     padding: 0;
+    padding-bottom: 20px;
     overflow: auto;
     white-space: nowrap;
     scroll-behavior: smooth;
@@ -191,6 +168,9 @@
     text-align: center;
     font-size: 20px;
     font-weight: bold;
+}
+.student-table .container table thead tr th{
+    padding: 0 10px ;
 }
 .student-table .container table th.col-sticky,
 .student-table .container table td.col-sticky{
@@ -275,6 +255,10 @@
     border: 2px #77777763 solid;
     box-shadow: inset 0 0px 2px 0px #c3c3c3;
 }
+.student-table .container table tbody tr td.total-body .outer{
+    width: 59px;
+    height: 59px;
+}
 .student-table .container table tbody tr td .inner{
     width: 40px;
     height: 40px;
@@ -291,11 +275,13 @@ circle{
     stroke-dasharray: 144;
     stroke-dashoffset: 0;
 }
+td.total-body circle{
+    stroke-dasharray: 177;
+}
 
 .student-table .container table tbody tr td.appre-body{
     width: 80px;
 }
-
 
 /* Custome Scroll Bar */
 .student-table .container::-webkit-scrollbar{
@@ -345,12 +331,57 @@ circle{
         transform: translate(0% , 20%) !important;  
     }
 }
+@media (max-width : 600px) {
+    .next-previous .container{
+        display: grid;
+        grid-template-columns: repeat(2 , minmax(50px , 1fr));
+        grid-template-rows: repeat(2 , minmax(50px , 1fr));
+        justify-content: center;
+        height: 130px;
+        padding-bottom: 0;
+    }
+    .next-previous .container h1{
+        justify-self: center;
+    }        
+    .next-previous .container .Title-holder{
+        grid-column-start: 1;
+        grid-column-end: 3;
+        width: 100%;
+    }
+    .next-previous .container .previous{
+        grid-row-start: 2;
+        grid-row-end: 3;
+        justify-self:flex-end;
+        align-items:flex-end;
+        margin-top: -15px;
+
+    }        
+    .next-previous .container .next{
+        grid-row-start: 2;
+        grid-row-end: 3;
+        margin-top: -15px;
+    }        
+    #goback{
+        display: none;
+    }
+    .up-down-holder{
+        display: none;
+    }
+
+}
 @media (max-width: 580px){
+    #goback{
+        display: none;
+    }
     .student-table{
     margin-top: 60px;
     }
+    .student-table .next-previous .container{
+        height: 150px;
+    }
     .student-table .container{
     max-width: 400px;
+
     }
     .student-table .container table thead tr{
     font-size: 15px;
@@ -401,16 +432,20 @@ circle{
     }
     }
     .student-table .container table tbody tr td.total-body{
-        background-color: var(--main-color) ;
+        background-color:transparent ;
         opacity: 0.8;
-        color: white;
+        box-shadow: none;
     }
     .student-table .container table tbody tr td.total-body .rate{
         font-size: 25px;
     }
+    .student-table .container table tbody tr  td.appre-body{
+        background-color: transparent;
+        box-shadow: none;
+    }
     .student-table .container table tbody tr  div.appre{
         margin-top: 4px;
-        font-family: 'Hesham' , serif;
+        /* font-family: 'Hesham' , serif; */
         font-size: 20px;
     }
 

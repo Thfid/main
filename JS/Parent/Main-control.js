@@ -1,5 +1,7 @@
 let users =[]
 // GitHub
+let mosqueNumber = "";
+let teatchersArray = []
 fetch("https://thfid.github.io/DataBase/Students.json")
 // fetch("../DataBase/Teatchers.JSON")
 .then(res=>res.json())
@@ -7,20 +9,35 @@ fetch("https://thfid.github.io/DataBase/Students.json")
 .then(res=>{
     users.map(e=>{
         if ( sessionStorage.getItem("User") == e[Object.keys(e)].parentId){
+            let data = e[Object.keys(e)]
             let user = document.getElementById("user-welcome")
             user.innerText = 
             `مرحبا ${e[Object.keys(e)].studintName.split(" ")[1].replace("_" , " ")} \
              ${e[Object.keys(e)].studintName.split(" ")[e[Object.keys(e)].studintName.split(" ").length - 1].replace("_" , " ")}`
-            //  Add childerns
+             if(!teatchersArray.includes(data.teatcherId)){
+                teatchersArray.push(data.teatcherId)
+             }
+             if(!sessionStorage.getItem("Info")){
+                mosqueNumber = data.mosqueN
+            }
         }
     })
+    if(!sessionStorage.getItem("Info")){
+        let infoObject = {
+            userType : "Parent",
+            mosqueN : mosqueNumber,
+            teatchersId : teatchersArray
+        }
+        sessionStorage.setItem('Info' , JSON.stringify(infoObject) )
+    }
 })
+
 
 //  Student Log
 let studentLog = document.getElementById("studing-log")
 studentLog.onclick = ()=>{
     let link = document.createElement("a")
-    link.href = "./parent.html"
+    link.href = "./parent-log.html"
     document.body.appendChild(link)
     link.click()
     link.remove()
@@ -45,4 +62,3 @@ logOut.onclick = ()=>{
     linkBack.click()
     linkBack.remove()
 }
-console.log("Hi");

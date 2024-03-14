@@ -1,6 +1,21 @@
 import HijriJS from "./Hijri.js"
 import * as components from "./Eshada.js"
+// 1 - There is two type of users .. Parent & Studints 
+//  For That i have to do two fetchs .. one for Parent
+//  And one for student's .
 
+// 2 - Make Student only see thers meets
+
+let users =[]
+let mosqueNumber = ""
+let teatchers = '';
+if(sessionStorage.getItem("Info")){
+let data  = JSON.parse(sessionStorage.getItem("Info"))
+mosqueNumber = data.mosqueN.slice(1)
+teatchers = data.teatchersId;
+}else{
+    // Here but the 501 error
+}
 let goBack = document.getElementById("goback")
 goBack.onclick = ()=>{
     history.back()
@@ -26,14 +41,15 @@ downbutton.onclick = () => {
 let selectedDay = HijriJS.today().toString().split("/")[0]
 let selectedMonth = HijriJS.today().toString().split("/")[1]
 let selectedYear = HijriJS.today().toString().split("/")[2].slice(0,4)
+let currentYear = selectedYear
 let currentMonth = +selectedMonth
-let currentWeek = Math.floor(+selectedDay / 8)
+let currentWeek = Math.floor(+selectedDay / 7)
 
 let tableTitleH1 = document.getElementById("TitleOfTable")
 let monthArray = ["صفر" , "محرم", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"]
-let monthtitle = monthArray[+selectedMonth - 1]
 
 function tableTitle(){
+    let monthtitle = monthArray[+currentMonth - 1]
     let reportType = document.querySelector(".report-type-control.active")
     if(reportType.id == "weekly"){
     switch(currentWeek){
@@ -67,7 +83,11 @@ nextDataBtn.addEventListener("click" , ()=>{
     let reportType = document.querySelector(".report-type-control.active")
     if(reportType.id == "weekly" && currentWeek < 4){
         currentWeek += 1
-    } else if(reportType.id == "monthly"  && currentMonth < 11 ){
+    } else if(reportType.id == "weekly" && currentWeek == 4) {
+        currentWeek = 0
+        currentMonth += 1
+    }
+    if(reportType.id == "monthly"  && currentMonth < 11 ){
         currentMonth +=1
     }
     tableTitle()
@@ -77,7 +97,11 @@ preDataBtn.addEventListener("click" , ()=>{
     let reportType = document.querySelector(".report-type-control.active")
     if(reportType.id == "weekly" && currentWeek > 0 ){
         currentWeek -= 1
-    } else if(reportType.id == "monthly" && currentMonth > 0){
+    } else if (reportType.id == "weekly" && currentWeek == 0 ){
+        currentWeek = 4
+        currentMonth -= 1
+    }
+    if(reportType.id == "monthly" && currentMonth > 0){
         currentMonth -= 1
     }
     tableTitle()
@@ -103,18 +127,21 @@ changeRebortType(weekly)
 changeRebortType(monthly)
 changeRebortType(yearly) 
 
+
 // Start Giting Data
 function StartData(reportType){
     addedStudint = []
 // GitHub
-fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
-// fetch("../DataBase/PeriodicEvaluation.JSON")
+fetch(`https://thfid.github.io/DataBase/${mosqueNumber}/${currentYear.slice(2)}/${currentMonth.toString().padStart(2,"0")}/PeriodicEvaluation.json`)
+// fetch(`../DataBase/${mosqueNumber}/${currentYear.slice(2)}/${currentMonth.toString().padStart(2,"0")}/PeriodicEvaluation.JSON`)
 .then(res=>{
     tableBody.innerHTML = ``
     return res.json()
-})
+},
+rej=>{return components.popup("info" , "لا يوجد بيانات للشهر المحدد")}
+)
 .then(res=>{
-    let database = res[selectedYear][currentMonth.toString().padStart(2,"0")]
+    let database = res[currentMonth.toString().padStart(2,"0")]
     switch (reportType) {
         case "weekly":
             database = database.slice((currentWeek * 5) , ((currentWeek * 5) + 5))
@@ -123,7 +150,6 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
             database = database
             break;
         case "yearly":
-            console.log("Good After None");
             break;
         default:
             break;
@@ -157,12 +183,16 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
             return res
         })
         .then(res=>{
+            let admin = false
+            let currentTeacher = teatchers
             let tableCount = 0
             res.map(element=>{
                 let day = element[Object.keys(element)]
                 day.daily.map(ele=>{
+                    if (admin == false){
                     if(!addedStudint.includes(Object.keys(ele).join(""))){
                         let data = ele[Object.keys(ele)]
+                        if(currentTeacher.includes(data.teatcherId)){
                             tableCount += 1
                             tableBody.innerHTML += `
                             <tr class="a${Object.keys(ele).join("")}">
@@ -175,6 +205,14 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
                                 <svg width="60px" height="60px">
                                 <circle cx="30" cy="30" r="23" stroke-linecap="round" />
                                 </svg>                     
+                            </td>
+                            
+                            <td class="commitment-body">
+                                <span></span>
+                                <div class="outer"></div>
+                                <svg width="60px" height="60px">
+                                    <circle cx="30" cy="30" r="23" stroke-linecap="round" />
+                                </svg>
                             </td>
 
                             <td class="review-body">
@@ -201,15 +239,12 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
                                 </svg>
                             </td>
 
-                            <td class="commitment-body">
-                                <span></span>
-                                <div class="outer"></div>
-                                <svg width="60px" height="60px">
-                                    <circle cx="30" cy="30" r="23" stroke-linecap="round" />
-                                </svg>
-                            </td>
                             <td class="total-body">
                                 <div class = "rate"></div>
+                                <div class="outer"></div>
+                                <svg width="100px" height="100px">
+                                    <circle cx="50" cy="50" r="28.5" stroke-linecap="round" />
+                                </svg>
                             </td>
                             <td class="appre-body">
                                 <div class ="appre"></div>
@@ -218,7 +253,66 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
     
                             `
                             addedStudint.push(Object.keys(ele).join(""))
-                        }     
+                        } 
+                    }
+                    }else{
+                        if(!addedStudint.includes(Object.keys(ele).join(""))){
+                            let data = ele[Object.keys(ele)]
+                            tableCount += 1
+                            tableBody.innerHTML += `
+                            <tr class="a${Object.keys(ele).join("")}">
+                            <td class="number-body col-sticky">${tableCount}</td>
+                            <td class="name-body col-sticky">${data.studintname}</td>
+                            <td class="memoriztion-body">                      
+                                <span></span>
+                                <div class="outer"></div>
+                                <svg width="60px" height="60px">
+                                    <circle cx="30" cy="30" r="23" stroke-linecap="round" />
+                                </svg>                     
+                            </td>
+                            <td class="commitment-body">
+                                <span></span>
+                                <div class="outer"></div>
+                                <svg width="60px" height="60px">
+                                    <circle cx="30" cy="30" r="23" stroke-linecap="round" />
+                                </svg>
+                            </td>
+                            <td class="review-body">
+                                <span></span>
+                                <div class="outer"></div>
+                                <svg width="60px" height="60px">
+                                    <circle cx="30" cy="30" r="23" stroke-linecap="round" />
+                                </svg>
+                            </td>
+                            <td class="attendence-body">
+                                <span></span>
+                                <div class="outer"></div>
+                                <svg width="60px" height="60px">
+                                    <circle cx="30" cy="30" r="23" stroke-linecap="round" />
+                                </svg>
+                            </td>
+                            <td class="behavior-body">
+                                <span></span>
+                                <div class="outer"></div>
+                                <svg width="60px" height="60px">
+                                    <circle cx="30" cy="30" r="23" stroke-linecap="round" />
+                                </svg>
+                                </td>
+                                <td class="total-body">
+                                <div class = "rate"></div>
+                                <div class="outer"></div>
+                                <svg width="100px" height="100px">
+                                    <circle cx="50" cy="50" r="28.5" stroke-linecap="round" />
+                                </svg>
+                            </td>
+                            <td class="appre-body">
+                                <div class ="appre"></div>
+                            </td>
+                        </tr>
+                            `                 
+                            addedStudint.push(Object.keys(ele).join(""))
+                        }
+                    }
                 })
     
             })
@@ -340,12 +434,16 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
                 }
 
                 // Attendence
-                attendence.innerHTML = (10 - (absentDays * 2))
-                attendenceCircle.style.strokeDashoffset = `${(absentDays * 2) * 14.0}`
-                if((absentDays * 2) > 2.5 && (absentDays * 2) < 5){
+                let countOfWeeks = 1
+                if(reportType == "monthly"){
+                    countOfWeeks = 4
+                }
+                attendence.innerHTML = (10 - ((absentDays * 2) / countOfWeeks)).toString().slice(0,3)
+                attendenceCircle.style.strokeDashoffset = `${((absentDays * 2) / countOfWeeks) * 14.0}`
+                if(((absentDays * 2) / countOfWeeks) > 2.5 && ((absentDays * 2) / countOfWeeks) < 5){
                     attendence.style.color = "#c19619";
                     attendenceCircle.style.stroke = "#c19619"
-                } else if ((absentDays * 2) >= 5){
+                } else if (((absentDays * 2) / countOfWeeks) >= 5){
                     attendence.style.color = "#c11d19";
                     attendenceCircle.style.stroke = "#c11d19"
                 }
@@ -365,12 +463,6 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
                 let commitmentTarget = 7.2 * countableDay
                 let commitclac = 0
                 let defferent = commitmentTarget - linesTotal
-                // console.log(`
-                // need :${commitmentTarget}
-                // done :${linesTotal}
-                // defference : ${defferent}
-                // _______________________
-                // `);
                 if(defferent <=0){
                     commitclac = 10
                 } else if(defferent > 0){
@@ -393,33 +485,40 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
             let row = document.querySelectorAll("table tbody tr")
             row.forEach(e=>{
                 let memoriztion = document.querySelector(`.${e.classList[0]} .memoriztion-body span`)
+                let commitment = document.querySelector(`.${e.classList[0]} .commitment-body span`)
                 let review = document.querySelector(`.${e.classList[0]} .review-body span`)
                 let attendence = document.querySelector(`.${e.classList[0]} .attendence-body span`)
                 let behavior = document.querySelector(`.${e.classList[0]} .behavior-body span`)
-                let commitment = document.querySelector(`.${e.classList[0]} .commitment-body span`)
                 let total = document.querySelector(`.${e.classList[0]} .total-body div.rate`)
+                let totalCircle = document.querySelector(`.${e.classList[0]} .total-body svg circle`)
+                // Full strok is 176
                 let cell = document.querySelector(`.${e.classList[0]} .total-body`)
 
                 let rate = +memoriztion.innerHTML + +review.innerHTML + +attendence.innerHTML + +behavior.innerHTML + +commitment.innerHTML
                 total.innerHTML = rate.toString().split("").slice(0 , 4).join("")
-                cell.style.strokeDashoffset = `${(50 - rate) * 2.88}`
-                if(rate < 40 && rate >= 30){
-                    cell.style.backgroundColor = "#108fcb";
+                totalCircle.style.strokeDashoffset = `${(50 - rate) * 3.52}`
+                totalCircle.style.stroke = 'white'
+                if(rate >= 40){
+                    total.style.color = "var(--main-color)";
+                    totalCircle.style.stroke = "var(--main-color)";
+                }else if(rate < 40 && rate >= 30){
+                    total.style.color = "#108fcb";
+                    totalCircle.style.stroke = "#108fcb";
                 } else if (rate < 30 && rate >= 20){
-                    cell.style.backgroundColor = "#c19619";
+                    total.style.color = "#c19619";
+                    totalCircle.style.stroke = "#c19619";
                 } else if (rate < 20 ){
-                    cell.style.backgroundColor = "#c11d19";
+                    total.style.color = "#c11d19";
+                    totalCircle.style.stroke = "#c11d19";
                 }
-
                 let appre = document.querySelector(`.${e.classList[0]}  .appre`)
                 if(rate >= 45) appre.innerHTML = "ممتاز"
                 else if(rate < 45 && rate >= 40) appre.innerHTML = "جيد جدًا"
                 else if(rate < 40 && rate >= 30) appre.innerHTML = "جيد"
                 else if(rate < 30 && rate >= 20) appre.innerHTML = "مقبول"
-                else if(rate < 20) appre.innerHTML = "ضعيف"
-
-                 
+                else if(rate < 20) appre.innerHTML = "ضعيف"       
             })
+        }).then(res=>{
             function sortTable() {
                 var table, rows, switching, i, x, y, shouldSwitch;
                 table = document.querySelector("table");
@@ -437,8 +536,8 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
                     shouldSwitch = false;
                     /*Get the two elements you want to compare,
                     one from current row and one from the next:*/
-                    x = rows[i].getElementsByTagName("TD")[7];
-                    y = rows[i + 1].getElementsByTagName("TD")[7];
+                    x = rows[i].getElementsByTagName("TD")[7].children[0];
+                    y = rows[i + 1].getElementsByTagName("TD")[7].children[0];
                     //check if the two rows should switch place:
                     if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                       //if so, mark as a switch and break the loop:
@@ -460,9 +559,9 @@ fetch("https://thfid.github.io/DataBase/PeriodicEvaluation.json")
             let counter = document.querySelectorAll(".number-body.col-sticky")
             let count = 0
             counter.forEach(e=>{
-                count += 1
+                count +=1
                 e.innerHTML = count
-            })  
+            })
         })
         .catch(rej=>{
             tableBody.innerHTML +=`
