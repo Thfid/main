@@ -104,8 +104,46 @@ function StartData(){
         dayArray.map(e=>e.innerHTML = "")
 
         let monthData = res[currentMonth.toString().padStart(2 , "0")]
-
-        let weekData = monthData.slice((currentWeek * 5) , ((currentWeek * 5) + 5))
+        let defferentDays = 0
+        let weekData
+        switch(monthData[0][Object.keys(monthData[0])].day){
+            case "الأحد" : 
+            defferentDays = 0
+            break;
+            case "الإثنين" : 
+            defferentDays = 1
+            break;
+            case "الثلاثاء" : 
+            defferentDays = 2
+            break;
+            case "الأربعاء" : 
+            defferentDays = 3
+            break;
+            case "الخميس" : 
+            defferentDays = 4
+            break;
+        }    
+        if (currentWeek == 0) {
+            switch(monthData[0][Object.keys(monthData[0])].day){
+                case "الأحد" : 
+                weekData = monthData.slice( 0 , 5)
+                break;
+                case "الإثنين" : 
+                weekData = monthData.slice( 0 , 4)
+                break;
+                case "الثلاثاء" : 
+                weekData = monthData.slice( 0 , 3)
+                break;
+                case "الأربعاء" : 
+                weekData = monthData.slice( 0 , 2)
+                break;
+                case "الخميس" : 
+                weekData = monthData.slice( 0 , 1)
+                break;
+            }    
+        }else {
+            weekData = monthData.slice((currentWeek * 5 - defferentDays) , ((currentWeek * 5 - defferentDays) + 5))
+        }        
         let tableCount = 0
         weekData.map(day=>{ 
             let totaldata = day[Object.keys(day)];

@@ -145,7 +145,47 @@ rej=>{return components.popup("info" , "لا يوجد بيانات للشهر ا
     let database = res[currentMonth.toString().padStart(2,"0")]
     switch (reportType) {
         case "weekly":
-            database = database.slice((currentWeek * 5) , ((currentWeek * 5) + 5))
+            let defferentDays = 0
+            let weekData
+            switch(database[0][Object.keys(database[0])].day){
+                case "الأحد" : 
+                defferentDays = 0
+                break;
+                case "الإثنين" : 
+                defferentDays = 1
+                break;
+                case "الثلاثاء" : 
+                defferentDays = 2
+                break;
+                case "الأربعاء" : 
+                defferentDays = 3
+                break;
+                case "الخميس" : 
+                defferentDays = 4
+                break;
+            }    
+            if (currentWeek == 0) {
+                switch(database[0][Object.keys(database[0])].day){
+                    case "الأحد" : 
+                    weekData = database.slice( 0 , 5)
+                    break;
+                    case "الإثنين" : 
+                    weekData = database.slice( 0 , 4)
+                    break;
+                    case "الثلاثاء" : 
+                    weekData = database.slice( 0 , 3)
+                    break;
+                    case "الأربعاء" : 
+                    weekData = database.slice( 0 , 2)
+                    break;
+                    case "الخميس" : 
+                    weekData = database.slice( 0 , 1)
+                    break;
+                }    
+            }else {
+                weekData = database.slice((currentWeek * 5 - defferentDays) , ((currentWeek * 5 - defferentDays) + 5))
+            }
+            database = weekData
             break;
         case "monthly":
             database = database
