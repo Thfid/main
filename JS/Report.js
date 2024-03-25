@@ -1,5 +1,5 @@
 import HijriJS from "./Hijri.js"
-import surah from "./surah.js"
+import * as surahData from "./surah.js";
 import * as components from "./Eshada.js"
 
 
@@ -35,7 +35,7 @@ downbutton.onclick = () => {
 
 // Get Surah Array from other file
 let surahArray = []
-surah.forEach(e=>{surahArray.push(Object.keys(e).join(""))})
+surahData.surah.forEach(e=>{surahArray.push(Object.keys(e).join(""))})
 surahArray.reverse()
 
 
