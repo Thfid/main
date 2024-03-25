@@ -74,6 +74,7 @@ header.main-header-pnc #user-welcome{
     margin-top: 20px;
     font-size: 25px;
     font-weight: bold;
+    text-align: center;
     transition: var(--main-transition);
 }
 .content .container .box:hover .label{

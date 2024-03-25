@@ -46,6 +46,15 @@ reportbtn.onclick = ()=>{
     link.click()
     link.remove()
 }
+// Groups
+let groupsBtn = document.getElementById("groups")
+groupsBtn.onclick = ()=>{
+    let link = document.createElement("a")
+    link.href = "./groups.html"
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+}
 
 //  LogOut
 let logOut = document.getElementById("log-out")

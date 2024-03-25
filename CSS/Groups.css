@@ -1,0 +1,318 @@
+.memo-rev-control-holder{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.memo-rev-control-holder h2{
+    margin-bottom: 10px;
+    color: var(--main-color);
+}
+/* Start Groups */
+.groups{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.groups .container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px , 1fr));
+    gap: 20px;
+    direction: rtl;
+}
+
+.groups .container .box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 6;
+    height: fit-content;
+    border-radius: 10px;
+    transition: var(--main-transition);
+}
+.groups .container .box.edit-mode{
+    cursor: pointer;
+}
+.groups .container .box.edit-mode:hover{
+    transform: scale(1.05);
+}
+.groups .container .box .title{
+    width: 100%;
+    transition: var(--main-transition);
+}
+.groups .container .box .title .title-content{
+    height: 35px;
+    width: 100%;
+    font-family: "Cairo" , sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: var(--main-color);
+    border: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: var(--main-transition);
+}
+.groups .container .box.edit-mode:hover .title .title-content{
+    background-color: var(--main-hover);
+}
+.groups .container .box.edit-mode .title .title-content{
+    cursor: pointer;
+}
+.groups .container .box .title .title-content:focus{
+    outline: none;
+}
+.groups .container .box .content{
+    width: 100%;
+}
+.groups .container .box .content table{
+    width: 100%;
+    overflow: scroll;
+    white-space: nowrap;
+    max-width: 100%;
+    border-spacing: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+.groups .container .box .content table thead th{
+    text-align: center;
+    border: 2px var(--main-color) solid;
+    color: var(--main-color);
+    padding: 0 5px;
+}
+.groups .container .box .content table thead th.number-head{
+    width: 20px;
+}
+.groups .container .box .content table thead th.name-head{
+    width: 325px;
+}
+.groups .container .box .content table thead th{
+    border-right-width: 0.5px;
+    border-left-width: 0.5px;
+}
+.groups .container .box .content table tbody tr{
+    height: 35px;
+}
+.groups .container .box .content table tbody tr td{
+    color: #777;
+    border: 0.5px #777 solid;
+    position: relative;
+}
+.groups .container .box .content table tbody tr:first-of-type td:not(:last-of-type),
+.groups .container .box .content table tbody tr td{
+    border-right-width: 0.5px;
+    border-left-width: 0.5px;
+    border-top-color: transparent;
+}
+.groups .container .box .content table tbody tr td:not(:nth-child(2)){
+    text-align: center;
+}
+.groups .container .box .content table tbody tr td:nth-child(2){
+    padding-right: 5px;
+}
+.groups .container .box .content table tbody tr:last-of-type td:first-of-type{
+    border-bottom-right-radius: 10px;
+}
+.groups .container .box .content table tbody tr:last-of-type td:last-of-type{
+    border-bottom-left-radius: 10px;
+}
+
+table .rank-head{
+    width: 60px;
+}
+table .name-body{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* Start Edit Btn */
+
+.edit-erea{
+    position: fixed;
+    top: 8%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    z-index: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    animation: Fadgein 150ms linear 0s forwards;
+}
+
+.edit-erea span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: -0px;
+    width: 50px;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 1px solid var(--red-color);
+    font-family: "Cairo" , sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: var(--red-color);
+    transition: var(--main-transition);
+    color: white;
+}
+.edit-erea span:hover{
+    color: var(--red-color);
+    background-color: transparent;
+}
+
+.delete-erea{
+    position: absolute;
+    height: 350px;
+    width: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    z-index: 12;
+    direction: rtl;
+}
+.delete-erea .delete-erea-close{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid red;
+    font-family: "Cairo" , sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--main-transition);
+    color: red;
+}
+.delete-erea .delete-erea-close:hover{
+    transform: scale(1.1);
+}
+.delete-erea .icon{
+    color: red;
+    font-size: 70px;
+    margin-top: 20px;
+    margin-bottom: -20px;
+}
+.delete-erea .title{
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+    color: red;
+}
+.delete-erea .delete-btn-holder{
+    margin-top: 20px;
+    width: 80%;
+    height: 35px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.delete-erea .delete-btn-holder .btn-delete{
+    width: 40%;
+    height: 35px;
+    border: none;
+    font-family: "Cairo";
+    font-size: 18px;
+    font-weight: bolder;
+    color: white;
+    border-radius: 10px;
+    transition: var(--main-transition);
+    cursor: pointer;
+}
+.delete-erea .delete-btn-holder .btn-delete.yes{
+    background-color: red;
+}
+.delete-erea .delete-btn-holder .btn-delete.yes:hover{
+    background-color: white;
+    color: red;
+    border: 1px red solid;
+}
+.delete-erea .delete-btn-holder .btn-delete.no{
+    background-color: var(--green-color);
+}
+.delete-erea .delete-btn-holder .btn-delete.no:hover{
+    background-color: white;
+    color: var(--green-color);
+    border: 1px var(--green-color) solid;
+}
+
+@media (max-width: 600px) {
+.btn .add-group:not(.disnone),
+.btn .edit-group:not(.disnone){
+width: 320px;
+font-size: 14px;
+}
+.btn .add-group::after {
+ right: 29px;   
+}
+.btn .edit-group::after{
+right: 145px;
+}
+.btn .add-group:not(.disnone) {
+    top: calc(100% + 27px);
+    right: 11px;
+}
+.btn .add-group #reject-group,
+ .btn .edit-group #close-edit{
+    left: -13px;
+    top: -14px;
+ }
+.btn .add-group .holder,
+.btn .edit-group .holder {
+width: 100%;
+}
+.btn .add-group .members,
+.btn .edit-group .members{
+    width: 95%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.add-control{
+    width: 95%;
+    margin: auto;
+}
+.add-control .hundel.name input,
+.add-control .hundel.rank select{
+    height: 30px;
+    font-size: 15px;
+}
+.add-control .hundel.rank select option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-control .hundel.btns button {
+    font-size: 15px;
+}
+#submit-group, #submit-edit-group{
+    margin-left: 10px;
+}
+.edit-erea{
+    width: 300px;
+    font-size: 15px;
+    padding-left: 30px;
+}
+}
