@@ -1,0 +1,134 @@
+.container table{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 100%;
+    direction: rtl;
+    position: relative;
+    border-spacing: 3px 5px
+}
+.container table thead{
+    background-color: var(--main-color);
+    color: white;
+    position: relative;
+}
+
+.container table thead tr{
+    height: fit-content;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+.container table .number{
+    min-width: 11px;
+    max-width: 11px;
+    right: 0;
+}
+.container table thead .number{
+    border-top-right-radius: 10px;
+    background-color: var(--main-color);
+    border-left: 1.25px white solid;
+}
+.container table tbody .number{
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 0px #777;
+    color: #777;
+}
+
+.container table thead tr:first-of-type th:first-of-type {
+    border-top-right-radius: 10px;
+}
+.container table thead tr:first-of-type th:last-of-type{ 
+    border-top-left-radius: 10px;
+}     
+ .container table tbody tr{
+    height: 45px;
+    font-weight: bold;
+    transition: var(--main-transition);
+}
+.container table tbody td{
+     text-align: center;
+}
+.container table tbody tr td{
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px #777;
+    color: #777;
+    transition: var(--main-transition);
+    font-size: 20px;
+}
+.container table tbody tr th.no-Data{
+    font-size: 30px;
+    margin-top: 50px;
+    padding-top: 50px;
+    color: var(--red-color);
+}
+.container table tbody tr td.name-body{
+    padding-right: 5px;
+}
+/* Custome Scroll Bar */
+ .container::-webkit-scrollbar{
+    height: 5px;
+}
+ .container::-webkit-scrollbar-thumb {
+    background-color:var(--main-color);
+    border-radius: 20px;
+}
+ .container::-webkit-scrollbar-thumb:hover {
+    background-color:#318e8a;
+}
+ .container::-webkit-scrollbar-track {
+    background-color:#d3d3d3bc;
+    border-radius: 20px;
+    margin-inline: 255px;
+}
+/* Start Phone Mode (Table)*/
+@media (max-width: 580px){
+
+    .container{
+    max-width: 400px;
+    }
+     .container table thead tr{
+    font-size: 15px;
+    }
+     .container table thead tr th{
+    padding: 0 5px;
+    }
+     .container table thead tr .name{
+    width: 200px;
+    }
+     .container table .number{
+        min-width: 11px;
+        max-width: 11px;
+        right: 0;
+    }
+     .container table thead .number{
+        border-top-right-radius: 10px;
+        background-color: var(--main-color);
+        border-left: 1.25px white solid;
+    }
+     .container table tbody .number{
+        background-color: #fff;
+        box-shadow: 0px 0px 5px 0px #777;
+        color: #777;
+    }
+     .container table .name{
+        max-width: 150px;
+        min-width: 150px;
+        right: 40px;
+    }
+     .container table tbody .name{
+        font-size: 13px;
+    }
+
+     .container table thead tr{
+    width: 70px;
+    }
+     .container table tbody tr td{
+    font-size: 12px;
+    }
+     .container table tbody tr td.rate-body,
+     .container table tbody tr td.listener-body,
+     .container table tbody tr td.rate-rev-body{
+    display: none;
+    }
+    }
+    

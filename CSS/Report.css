@@ -280,8 +280,17 @@ td.total-body circle{
 }
 
 .student-table .container table tbody tr td.appre-body{
+    position: relative;
     width: 80px;
 }
+.student-table .container table tbody tr td.appre-body img{
+    width: 30px;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
 
 /* Custome Scroll Bar */
 .student-table .container::-webkit-scrollbar{

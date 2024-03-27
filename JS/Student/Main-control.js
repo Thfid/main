@@ -1,6 +1,5 @@
 let users =[]
 let mosqueNumber = "";
-let teatchersArray = []
 // GitHub
 fetch("https://thfid.github.io/DataBase/Students.json")
 // fetch("../DataBase/Teatchers.JSON")
@@ -14,12 +13,12 @@ fetch("https://thfid.github.io/DataBase/Students.json")
             user.innerText = `مرحبا ${data.studintName.split(" ")[0].replace("_" , " ")}`
             if(!sessionStorage.getItem("Info")){
                 mosqueNumber = data.mosqueN
-                teatchersArray.push(data.teatcherId)
                 let infoObject = {
                     userType : "Student",
                     mosqueN : mosqueNumber,
-                    teatchersId : teatchersArray,
-                    studentId : data.studintId
+                    teatchersId : data.teatcherId,
+                    studentId : data.studintId,
+                    currentSurah : data.currentSurah
                 }
                 sessionStorage.setItem('Info' , JSON.stringify(infoObject) )
             }  
@@ -55,7 +54,15 @@ groupsBtn.onclick = ()=>{
     link.click()
     link.remove()
 }
-
+// Reviews
+let reviewsBtn = document.getElementById("reviews")
+reviewsBtn.onclick = ()=>{
+    let link = document.createElement("a")
+    link.href = "./reviews.html"
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+}
 //  LogOut
 let logOut = document.getElementById("log-out")
 logOut.onclick = ()=>{

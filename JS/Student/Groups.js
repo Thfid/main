@@ -10,7 +10,7 @@ let studintname = "" ;
 if(sessionStorage.getItem("Info")){
   let data = JSON.parse(sessionStorage.getItem("Info"));
     mosqueNumber =  data.mosqueN.slice(1);
-    teatcherId = data.teatchersId[0]
+    teatcherId = data.teatchersId
 }else{
   console.log(`Error in`);
 }
@@ -55,7 +55,7 @@ fetch(`https://thfid.github.io/DataBase/${mosqueNumber}/Groups.json`)
         let data = JSON.parse(localStorage.getItem(`groups ${HijriJS.today().toString().split("/")[0]}`))
         data.map((e , index)=>{
           if(e.teatcherId == teatcherId){
-            let box = document.createElement("div");
+          let box = document.createElement("div");
           box.classList.add("box")
           box.setAttribute("table-number" , index)
         
