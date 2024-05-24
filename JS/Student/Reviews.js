@@ -140,10 +140,10 @@ let currentMonth = +selectedMonth
         reviewsdue.splice(5 , 1);
     }
     if(indexOfCurrent < 32){
-        reviewsdue[3] = [reviewsdue[3][0] , reviewsdue [4][1]]
-        reviewsdue.splice(4 , 1);
-        reviewsdue[4] = [reviewsdue[4][0] , reviewsdue [5][1]]
-        reviewsdue.splice(5 , 1);
+      reviewsdue[3] = [reviewsdue[3][0] , "الذاريات"]
+      reviewsdue.splice(4 , 1);
+      reviewsdue[4] = ["ق" , reviewsdue [5][1]]
+      reviewsdue.splice(5 , 1);
     }
     if(indexOfCurrent < 28){
         reviewsdue[5] = [reviewsdue[5][0] , reviewsdue [6][0]]
